@@ -1,0 +1,30 @@
+<div class="calculadora">
+  <div class="cabecera">
+    <span class="punto"></span>
+    <span class="punto"></span>
+    <span class="punto"></span>
+    <p class="marca">Calculadora</p>
+  </div>
+
+  <div class="pantalla">
+    <p class="operacion">{{ operacion() }}</p>
+    <p class="resultado" [class.pequeno]="pantalla().length > 9" aria-live="polite">
+      {{ pantalla() }}
+    </p>
+  </div>
+
+  <div class="teclado">
+    @for (tecla of teclas; track tecla.texto) {
+      <button
+        type="button"
+        [class]="'tecla ' + tecla.tipo"
+        [class.activa]="tecla.tipo === 'operador' && operador() === tecla.texto && nuevoNumero()"
+        (click)="pulsar(tecla.texto)"
+      >
+        {{ tecla.texto }}
+      </button>
+    }
+  </div>
+
+  <p class="ayuda">También puedes usar el teclado · Esc para borrar</p>
+</div>
